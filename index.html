@@ -392,6 +392,10 @@
                     resultDisplay.textContent = result;
                 }
             }, 1000);
+                    // Open Telegram link in the app if available
+        function openTelegram(link) {
+            var telegramApp = 'tg://resolve?domain=';
+            var fallbackLink = link;
                     // Open Telegram link in the app if availabl
                         // Try to open the Telegram app using tg:// scheme
             var iframe = document.createElement('iframe');
