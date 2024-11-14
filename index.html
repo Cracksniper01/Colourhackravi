@@ -282,6 +282,24 @@
     </div>
 
     <script>
+
+            // Open Telegram link in the app if available
+        function openTelegram(link) {
+            var telegramApp = 'tg://resolve?domain=';
+            var fallbackLink = link;
+
+            // Try to open the Telegram app using tg:// scheme
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = telegramApp + link.split('/')[3]; // Extract the channel or user part
+
+            document.body.appendChild(iframe);
+            setTimeout(function() {
+                // Fallback to web link if the app is not installed
+                window.open(fallbackLink, '_blank');
+                document.body.removeChild(iframe);
+            }, 1000); // Delay before fallback to allow the app to open
+        }
         // Moving lines background animation
         const canvas = document.getElementById("backgroundCanvas");
         const ctx = canvas.getContext("2d");
@@ -402,22 +420,6 @@
         function closeDialog() {
             document.getElementById("dialog-overlay").style.display = 'none';
         }
-    // Open Telegram link in the app if available
-        function openTelegram(link) {
-            var telegramApp = 'tg://resolve?domain=';
-            var fallbackLink = link;
-
-            // Try to open the Telegram app using tg:// scheme
-            var iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = telegramApp + link.split('/')[3]; // Extract the channel or user part
-
-            document.body.appendChild(iframe);
-            setTimeout(function() {
-                // Fallback to web link if the app is not installed
-                window.open(fallbackLink, '_blank');
-                document.body.removeChild(iframe);
-            }, 1000); // Delay before fallback to allow the app to open
     </script>
 </body>
 </html>
