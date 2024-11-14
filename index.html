@@ -268,8 +268,8 @@
             'Register' बटन पर क्लिक करके एक नया account बनाएं। यदि आप इस मॉड का उपयोग पुराने account में करते हैं, तो यह काम नहीं करेगा।
         </div>
         <button class="button register-btn" onclick="window.open('https://tinyurl.com/ynpekp7n', '_blank')">Register</button>
-        <button class="button" onclick="window.open('https://telegram.dog/earnwith_ravi', '_blank')">Join Telegram</button>
-        <button class="button" onclick="window.open('https://telegram.dog/Earn_ravi', '_blank')">Customer Care</button>
+        <button class="button" onclick="openTelegram('https://t.me/earnwith_ravi')">Join Telegram</button>
+        <button class="button" onclick="openTelegram('https://t.me/Earn_ravi')">Customer Care</button>
     </div>
 
     <!-- Dialog Box HTML -->
@@ -392,6 +392,7 @@
                     resultDisplay.textContent = result;
                 }
             }, 1000);
+            
         }
 
         window.onload = function() {
@@ -401,7 +402,22 @@
         function closeDialog() {
             document.getElementById("dialog-overlay").style.display = 'none';
         }
+    // Open Telegram link in the app if available
+        function openTelegram(link) {
+            var telegramApp = 'tg://resolve?domain=';
+            var fallbackLink = link;
 
+            // Try to open the Telegram app using tg:// scheme
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = telegramApp + link.split('/')[3]; // Extract the channel or user part
+
+            document.body.appendChild(iframe);
+            setTimeout(function() {
+                // Fallback to web link if the app is not installed
+                window.open(fallbackLink, '_blank');
+                document.body.removeChild(iframe);
+            }, 1000); // Delay before fallback to allow the app to open
     </script>
 </body>
 </html>
